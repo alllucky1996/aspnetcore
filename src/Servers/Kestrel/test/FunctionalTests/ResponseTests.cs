@@ -550,7 +550,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
             }
         }
 
-        [Fact]
+        [ConditionalFact]
+        [MinimumOSVersion(OperatingSystems.Windows, WindowsVersions.Win81)]
         public async Task HttpsConnectionClosedWhenResponseDoesNotSatisfyMinimumDataRate()
         {
             const int chunkSize = 1024;

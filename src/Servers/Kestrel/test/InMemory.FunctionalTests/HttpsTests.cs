@@ -115,7 +115,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             Assert.Null(serverOptions.DefaultCertificate);
         }
 
-        [Fact]
+        [ConditionalFact]
+        [MinimumOSVersion(OperatingSystems.Windows, WindowsVersions.Win81)]
         public async Task EmptyRequestLoggedAsDebug()
         {
             var loggerProvider = new HandshakeErrorLoggerProvider();
@@ -172,7 +173,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
         }
 
         // Regression test for https://github.com/aspnet/KestrelHttpServer/issues/1103#issuecomment-246971172
-        [Fact]
+        [ConditionalFact]
+        [MinimumOSVersion(OperatingSystems.Windows, WindowsVersions.Win81)]
         public async Task DoesNotThrowObjectDisposedExceptionOnConnectionAbort()
         {
             var loggerProvider = new HandshakeErrorLoggerProvider();
@@ -263,7 +265,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
         }
 
         // Regression test for https://github.com/aspnet/KestrelHttpServer/issues/1693
-        [Fact]
+        [ConditionalFact]
+        [MinimumOSVersion(OperatingSystems.Windows, WindowsVersions.Win81)]
         public async Task DoesNotThrowObjectDisposedExceptionOnEmptyConnection()
         {
             var loggerProvider = new HandshakeErrorLoggerProvider();
@@ -388,7 +391,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             Assert.Equal(LogLevel.Debug, loggerProvider.FilterLogger.LastLogLevel);
         }
 
-        [Fact]
+        [ConditionalFact]
+        [MinimumOSVersion(OperatingSystems.Windows, WindowsVersions.Win81)]
         public async Task OnAuthenticate_SeesOtherSettings()
         {
             var loggerProvider = new HandshakeErrorLoggerProvider();
@@ -424,7 +428,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             Assert.True(onAuthenticateCalled, "onAuthenticateCalled");
         }
 
-        [Fact]
+        [ConditionalFact]
+        [MinimumOSVersion(OperatingSystems.Windows, WindowsVersions.Win81)]
         public async Task OnAuthenticate_CanSetSettings()
         {
             var loggerProvider = new HandshakeErrorLoggerProvider();

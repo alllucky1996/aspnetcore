@@ -31,7 +31,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
         private static X509Certificate2 _x509Certificate2 = TestResources.GetTestCertificate();
         private static X509Certificate2 _x509Certificate2NoExt = TestResources.GetTestCertificate("no_extensions.pfx");
 
-        [Fact]
+        [ConditionalFact]
+        [MinimumOSVersion(OperatingSystems.Windows, WindowsVersions.Win81)]
         public async Task CanReadAndWriteWithHttpsConnectionMiddleware()
         {
             void ConfigureListenOptions(ListenOptions listenOptions)
@@ -51,7 +52,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             }
         }
 
-        [Fact]
+        [ConditionalFact]
+        [MinimumOSVersion(OperatingSystems.Windows, WindowsVersions.Win81)]
         public async Task HandshakeDetailsAreAvailable()
         {
             void ConfigureListenOptions(ListenOptions listenOptions)
@@ -96,7 +98,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             }
         }
 
-        [Fact]
+        [ConditionalFact]
+        [MinimumOSVersion(OperatingSystems.Windows, WindowsVersions.Win81)]
         public async Task AllowCertificateContinuesWhenNoCertificate()
         {
             void ConfigureListenOptions(ListenOptions listenOptions)
@@ -129,7 +132,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                 );
         }
 
-        [Fact]
+        [ConditionalFact]
+        [MinimumOSVersion(OperatingSystems.Windows, WindowsVersions.Win81)]
         public async Task UsesProvidedServerCertificate()
         {
             void ConfigureListenOptions(ListenOptions listenOptions)
@@ -148,7 +152,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             }
         }
 
-        [Fact]
+        [ConditionalFact]
+        [MinimumOSVersion(OperatingSystems.Windows, WindowsVersions.Win81)]
         public async Task UsesProvidedServerCertificateSelector()
         {
             var selectorCalled = 0;
@@ -179,7 +184,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             }
         }
 
-        [Fact]
+        [ConditionalFact]
+        [MinimumOSVersion(OperatingSystems.Windows, WindowsVersions.Win81)]
         public async Task UsesProvidedServerCertificateSelectorEachTime()
         {
             var selectorCalled = 0;
@@ -249,7 +255,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             }
         }
 
-        [Fact]
+        [ConditionalFact]
+        [MinimumOSVersion(OperatingSystems.Windows, WindowsVersions.Win81)]
         public async Task UsesProvidedServerCertificateSelectorOverridesServerCertificate()
         {
             var selectorCalled = 0;
@@ -309,7 +316,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             }
         }
 
-        [Theory]
+        [ConditionalTheory]
+        [MinimumOSVersion(OperatingSystems.Windows, WindowsVersions.Win81)]
         [InlineData(HttpProtocols.Http1)]
         [InlineData(HttpProtocols.Http1AndHttp2)] // Make sure Http/1.1 doesn't regress with Http/2 enabled.
         public async Task CertificatePassedToHttpContext(HttpProtocols httpProtocols)
@@ -346,7 +354,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             }
         }
 
-        [Fact]
+        [ConditionalFact]
+        [MinimumOSVersion(OperatingSystems.Windows, WindowsVersions.Win81)]
         public async Task HttpsSchemePassedToRequestFeature()
         {
             void ConfigureListenOptions(ListenOptions listenOptions)
@@ -390,7 +399,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             }
         }
 
-        [Theory]
+        [ConditionalTheory]
+        [MinimumOSVersion(OperatingSystems.Windows, WindowsVersions.Win81)]
         [InlineData(ClientCertificateMode.AllowCertificate)]
         [InlineData(ClientCertificateMode.RequireCertificate)]
         public async Task ClientCertificateValidationGetsCalledWithNotNullParameters(ClientCertificateMode mode)
@@ -425,6 +435,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
         }
 
         [ConditionalTheory]
+        [MinimumOSVersion(OperatingSystems.Windows, WindowsVersions.Win81)]
         [InlineData(ClientCertificateMode.AllowCertificate)]
         [InlineData(ClientCertificateMode.RequireCertificate)]
         public async Task ValidationFailureRejectsConnection(ClientCertificateMode mode)
@@ -450,7 +461,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             }
         }
 
-        [Theory]
+        [ConditionalTheory]
+        [MinimumOSVersion(OperatingSystems.Windows, WindowsVersions.Win81)]
         [InlineData(ClientCertificateMode.AllowCertificate)]
         [InlineData(ClientCertificateMode.RequireCertificate)]
         public async Task RejectsConnectionOnSslPolicyErrorsWhenNoValidation(ClientCertificateMode mode)
@@ -475,7 +487,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             }
         }
 
-        [Fact]
+        [ConditionalFact]
+        [MinimumOSVersion(OperatingSystems.Windows, WindowsVersions.Win81)]
         public async Task AllowAnyCertOverridesCertificateValidation()
         {
             void ConfigureListenOptions(ListenOptions listenOptions)
@@ -500,7 +513,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             }
         }
 
-        [Fact]
+        [ConditionalFact]
+        [MinimumOSVersion(OperatingSystems.Windows, WindowsVersions.Win81)]
         public async Task CertificatePassedToHttpContextIsNotDisposed()
         {
             void ConfigureListenOptions(ListenOptions listenOptions)

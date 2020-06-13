@@ -13,7 +13,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
 {
     public class LoggingConnectionMiddlewareTests : LoggedTest
     {
-        [Fact]
+        [ConditionalFact]
+        [MinimumOSVersion(OperatingSystems.Windows, WindowsVersions.Win81)]
         public async Task LoggingConnectionMiddlewareCanBeAddedBeforeAndAfterHttps()
         {
             await using (var server = new TestServer(context =>
