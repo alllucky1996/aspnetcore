@@ -116,7 +116,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
         }
 
         [ConditionalFact]
-        [MinimumOSVersion(OperatingSystems.Windows, WindowsVersions.Win81)]
+        [MinimumOSVersion(OperatingSystems.Windows, WindowsVersions.Win10)]
         public async Task EmptyRequestLoggedAsDebug()
         {
             var loggerProvider = new HandshakeErrorLoggerProvider();
