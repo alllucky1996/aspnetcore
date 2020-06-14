@@ -10,29 +10,29 @@ namespace Microsoft.AspNetCore.Http.Features
     public class RequestServicesFeature : IServiceProvidersFeature, IDisposable, IAsyncDisposable
     {
         private readonly IServiceScopeFactory _scopeFactory;
-        private IServiceProvider _requestServices;
-        private IServiceScope _scope;
+        private IServiceProvider? _requestServices;
+        private IServiceScope? _scope;
         private bool _requestServicesSet;
         private readonly HttpContext _context;
 
         public RequestServicesFeature(HttpContext context, IServiceScopeFactory scopeFactory)
         {
             _context = context;
-            _scopeFactory = scopeFactory;
+            _scopeFactory = scopeFactory ?? throw new ArgumentNullException(nameof(scopeFactory));
         }
 
         public IServiceProvider RequestServices
         {
             get
             {
-                if (!_requestServicesSet && _scopeFactory != null)
+                if (!_requestServicesSet)
                 {
                     _context.Response.RegisterForDisposeAsync(this);
                     _scope = _scopeFactory.CreateScope();
                     _requestServices = _scope.ServiceProvider;
                     _requestServicesSet = true;
                 }
-                return _requestServices;
+                return _requestServices!;
             }
 
             set
